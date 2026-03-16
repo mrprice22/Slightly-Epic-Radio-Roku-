@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- Copyright 2016 Roku Inc.  All Rights Reserved. -->
-
 <component name="HomeScene" extends="Scene">
 	<script type = "text/brightscript" uri = "pkg:/components/HomeScene.brs" />
 	<script type = "text/brightscript" uri = "pkg:/components/Config.brs" />
@@ -14,6 +12,39 @@
 			height = "1080"
 			enableUI = "true"
 			loop = "true" />
+
+		<!-- Station artwork shown during playback -->
+		<Poster
+			id = "StationPoster"
+			translation = "[560,190]"
+			width = "800"
+			height = "450"
+			loadWidth = "800"
+			loadHeight = "450"
+			loadDisplayMode = "scaleToFit" />
+
+		<!-- Now Playing info overlay -->
+		<Rectangle
+			id = "NowPlayingBar"
+			translation = "[0,660]"
+			width = "1920"
+			height = "120"
+			color = "0x000000CC"
+			opacity = "0.85">
+			<Label
+				id = "NowPlayingLabel"
+				height = "120"
+				width = "1800"
+				maxLines = "3"
+				wrap = "true"
+				text = ""
+				translation = "[60,0]"
+				vertAlign = "center"
+				horizAlign = "center"
+				font = "font:SmallBoldSystemFont"
+				color = "0xFFFFFFFF" />
+		</Rectangle>
+
 		<Rectangle
 			id = "BottomBar"
 			translation = "[0,1080]"

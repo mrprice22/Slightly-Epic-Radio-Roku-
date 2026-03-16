@@ -1,5 +1,3 @@
-' ********** Copyright 2016 Roku Inc.  All Rights Reserved. **********
-
 Sub init()
     if CanDecodeAudio()
         loadContent()
@@ -18,13 +16,23 @@ Sub loadContent()
     m.HideBar = m.top.findNode("HideBar")
     m.Hint = m.top.findNode("Hint")
     m.Timer = m.top.findNode("Timer")
+    m.StationPoster = m.top.findNode("StationPoster")
+    m.NowPlayingLabel = m.top.findNode("NowPlayingLabel")
+    m.NowPlayingBar = m.top.findNode("NowPlayingBar")
 
     showHint()
     m.array = loadContentFeed()
+    m.stationCount = m.array.count()
+    m.repeats = 100
+    m.midPoint = int(m.repeats / 2) * m.stationCount
 
     m.LoadTask = createObject("roSGNode", "RowListContentTask")
     m.LoadTask.observeField("content", "rowListContentChanged")
     m.LoadTask.control = "RUN"
+
+    ' Create the now-playing metadata polling task
+    m.NowPlayingTask = createObject("roSGNode", "NowPlayingTask")
+    m.NowPlayingTask.observeField("nowPlaying", "onNowPlayingChanged")
 
     m.Video.setFocus(true)
 
@@ -86,13 +94,55 @@ Function ChannelChange()
     m.Video.control = "play"
     m.global.options = 1
     OptionsMenu()
+
+    ' Map the repeated list index back to real station index
+    index = m.RowList.rowItemFocused[1] MOD m.stationCount
+    updateStationDisplay(index)
 End Function
 
 Sub rowListContentChanged()
     m.RowList.content = m.LoadTask.content
     if m.count = 0
-        m.Video.content = m.RowList.content.getChild(0).getChild(0)
+        ' Start focused in the middle of the repeated list for wrap-around effect
+        m.RowList.jumpToRowItem = [0, m.midPoint]
+        m.Video.content = m.RowList.content.getChild(0).getChild(m.midPoint)
         m.Video.control = "play"
         m.count = 1
+
+        ' Show poster and start metadata for the first station
+        updateStationDisplay(0)
+    end if
+End Sub
+
+Sub updateStationDisplay(index as Integer)
+    if index < m.array.count()
+        station = m.array[index]
+
+        ' Show the station artwork
+        m.StationPoster.uri = station.Logo
+
+        ' Stop previous metadata task and start a new one
+        m.NowPlayingTask.control = "STOP"
+        m.NowPlayingLabel.text = ""
+
+        if station.MetaType <> "none" and station.MetaUrl <> ""
+            m.NowPlayingTask = createObject("roSGNode", "NowPlayingTask")
+            m.NowPlayingTask.observeField("nowPlaying", "onNowPlayingChanged")
+            m.NowPlayingTask.metaUrl = station.MetaUrl
+            m.NowPlayingTask.metaType = station.MetaType
+            m.NowPlayingTask.streamUrl = station.Stream
+            m.NowPlayingTask.control = "RUN"
+            m.NowPlayingBar.visible = true
+        else
+            m.NowPlayingBar.visible = false
+        end if
+    end if
+End Sub
+
+Sub onNowPlayingChanged()
+    title = m.NowPlayingTask.nowPlaying
+    if title <> ""
+        m.NowPlayingLabel.text = title
+        m.NowPlayingBar.visible = true
     end if
 End Sub

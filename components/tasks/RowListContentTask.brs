@@ -7,9 +7,19 @@ End Sub
 Sub loadContent()
     array = loadContentFeed()
     content = GetContentFeed(array)
+
+    ' Repeat stations many times to simulate infinite wrap-around scrolling
+    repeatedContent = []
+    repeats = 100
+    for i = 0 to repeats - 1
+        for each item in content
+            repeatedContent.push(item)
+        end for
+    end for
+
     list = [ {
                 Title:"Streams"
-                ContentList : content
+                ContentList : repeatedContent
              } ]
     m.top.content = ParseContentFeed(list)
 End Sub
@@ -40,6 +50,8 @@ Function GetContentFeed(array as Object)
         item.streamFormat = element.streamFormat
         item.HDPosterUrl = element.Logo
         item.Url = element.Stream
+        item.MetaUrl = element.MetaUrl
+        item.MetaType = element.MetaType
         result.push(item)
     end for
     return result

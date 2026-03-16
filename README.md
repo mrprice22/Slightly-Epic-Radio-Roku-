@@ -6,14 +6,24 @@ An internet radio streaming app for Roku. Browse and listen to a curated selecti
 
 ## Features
 
-- Stream internet radio stations in MP3 format
-- Browse stations using a scrollable row list overlay
+- Stream internet radio stations in MP3 and AAC formats
+- **Now Playing** — live song title and artist info pulled from station metadata (Icecast JSON and Shoutcast endpoints)
 - Full-screen playback with station artwork
+- **Infinite scrolling** station browser — wraps around seamlessly in both directions
 - Simple remote-friendly navigation (UP to browse, DOWN to dismiss)
 
 ## Current Stations
 
-- **Slightly Epic Mashups** — mashup music stream
+| Station | Genre |
+|---------|-------|
+| **Slightly Epic Mashups** | Mashups / Multi-genre |
+| **EDM Techno Forever** | EDM / Techno |
+| **Electronic Dance Radio** | EDM |
+| **The Epic Channel** | Progressive Rock |
+| **Classical Public Domain Radio** | Classical |
+| **Cafe HD** | Various |
+| **Zen Garden** | New Age / Ambient |
+| **Alternative** | Alternative Rock |
 
 ## Getting Started
 
@@ -25,17 +35,19 @@ An internet radio streaming app for Roku. Browse and listen to a curated selecti
 
 ```
 source/
-  main.brs              - App entry point
+  main.brs                 - App entry point
 components/
-  HomeScene.xml          - Main scene layout (video player, row list, animations)
-  HomeScene.brs          - Scene logic and key handling
-  Config.brs             - Station feed configuration
-  RowListItems.xml       - Row list item template
+  HomeScene.xml            - Main scene layout (video player, row list, now playing bar, animations)
+  HomeScene.brs            - Scene logic, key handling, and metadata display
+  Config.brs               - Station feed configuration (streams, logos, metadata URLs)
+  RowListItems.xml         - Row list item template
   tasks/
-    RowListContentTask.brs - Async content loader
+    RowListContentTask.brs - Async content loader (with wrap-around repetition)
     RowListContentTask.xml
-images/                  - Station logos, splash screen, and icons
-manifest                 - Roku channel metadata
+    NowPlayingTask.brs     - Background metadata poller (Icecast/Shoutcast)
+    NowPlayingTask.xml
+images/                    - Station logos, splash screen, and icons
+manifest                   - Roku channel metadata
 ```
 
 ## License

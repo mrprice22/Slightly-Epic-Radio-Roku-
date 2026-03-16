@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<component name="NowPlayingTask" extends="Task">
+    <interface>
+        <field id="metaUrl" type="string" />
+        <field id="metaType" type="string" />
+        <field id="streamUrl" type="string" />
+        <field id="nowPlaying" type="string" />
+        <field id="control" type="string" onChange="onControlChange" />
+    </interface>
+
+    <script type="text/brightscript" uri="pkg:/components/tasks/NowPlayingTask.brs" />
+</component>
