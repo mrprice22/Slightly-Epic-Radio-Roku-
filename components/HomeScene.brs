@@ -97,20 +97,31 @@ Function ChannelChange()
 
     ' Map the repeated list index back to real station index
     index = m.RowList.rowItemFocused[1] MOD m.stationCount
+    saveLastStation(index)
     updateStationDisplay(index)
 End Function
 
 Sub rowListContentChanged()
     m.RowList.content = m.LoadTask.content
     if m.count = 0
-        ' Start focused in the middle of the repeated list for wrap-around effect
-        m.RowList.jumpToRowItem = [0, m.midPoint]
-        m.Video.content = m.RowList.content.getChild(0).getChild(m.midPoint)
+        ' Resume the last listened station, or default to the first one
+        lastStation = getLastStation()
+        if lastStation < 0 or lastStation >= m.stationCount
+            lastStation = 0
+        end if
+
+        ' With floatingFocus, focus floats to the right edge of visible items.
+        ' First jump far right to prime the float position, then jump back
+        ' so the starting station appears visually centered.
+        startIndex = m.midPoint + lastStation
+        m.RowList.jumpToRowItem = [0, startIndex + 100]
+        m.RowList.jumpToRowItem = [0, startIndex]
+        m.Video.content = m.RowList.content.getChild(0).getChild(startIndex)
         m.Video.control = "play"
         m.count = 1
 
-        ' Show poster and start metadata for the first station
-        updateStationDisplay(0)
+        ' Show poster and start metadata for the resumed station
+        updateStationDisplay(lastStation)
     end if
 End Sub
 
@@ -146,3 +157,17 @@ Sub onNowPlayingChanged()
         m.NowPlayingBar.visible = true
     end if
 End Sub
+
+Sub saveLastStation(index as Integer)
+    sec = createObject("roRegistrySection", "SlightlyEpicRadio")
+    sec.write("lastStation", index.toStr())
+    sec.flush()
+End Sub
+
+Function getLastStation() as Integer
+    sec = createObject("roRegistrySection", "SlightlyEpicRadio")
+    if sec.exists("lastStation")
+        return sec.read("lastStation").toInt()
+    end if
+    return 0
+End Function

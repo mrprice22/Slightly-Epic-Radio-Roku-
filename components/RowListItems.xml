@@ -38,15 +38,15 @@
 	<!-- Aspect ratio for thumbnails is 16:9 -->
 		<Poster
 			id = "poster"
-			height = "150"
-			width = "267"
-			loadWidth = "267"
-			loadHeight = "150"
+			height = "128"
+			width = "227"
+			loadWidth = "227"
+			loadHeight = "128"
 			loadDisplayMode = "scaleToFit">
 			<Label
 				id = "label"
 				height = "30"
-				width = "267"
+				width = "227"
 				horizAlign = "center"
 				color = "0xFFFFFFFF"
 				font = "font:SmallBoldSystemFont"

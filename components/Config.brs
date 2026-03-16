@@ -42,7 +42,7 @@ Function loadContentFeed() as Object
         },
         {
             Title: "Cafe HD"
-            streamFormat: "mp3"
+            streamFormat: "aac"
             Logo: "pkg:/images/CafeHD.jpg"
             Stream: "http://live.playradio.org:9090/CafeHD"
             MetaUrl: "http://live.playradio.org:9090/status-json.xsl"
