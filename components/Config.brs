@@ -57,6 +57,22 @@ Function loadContentFeed() as Object
             MetaType: "icecast"
         },
         {
+            Title: "Badlands Classic Rock"
+            streamFormat: "aac"
+            Logo: "pkg:/images/BadlandsClassicRock.jpg"
+            Stream: "http://ec3.yesstreaming.net:2040/stream"
+            MetaUrl: "http://ec3.yesstreaming.net:2040/status-json.xsl"
+            MetaType: "icecast"
+        },
+        {
+            Title: "UTurn Classic Rock"
+            streamFormat: "mp3"
+            Logo: "pkg:/images/UTurnClassicRock.jpg"
+            Stream: "http://listen.uturnradio.com:7000/classic_rock"
+            MetaUrl: "http://listen.uturnradio.com:7000/status-json.xsl"
+            MetaType: "icecast"
+        },
+        {
             Title: "Alternative"
             streamFormat: "aac"
             Logo: "pkg:/images/Alternative.jpg"
