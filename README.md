@@ -14,16 +14,18 @@ An internet radio streaming app for Roku. Browse and listen to a curated selecti
 
 ## Current Stations
 
-| Station | Genre |
-|---------|-------|
-| **Slightly Epic Mashups** | Mashups / Multi-genre |
-| **EDM Techno Forever** | EDM / Techno |
-| **Electronic Dance Radio** | EDM |
-| **The Epic Channel** | Progressive Rock |
-| **Classical Public Domain Radio** | Classical |
-| **Cafe HD** | Various |
-| **Zen Garden** | New Age / Ambient |
-| **Alternative** | Alternative Rock |
+| Station | Genre | Stream URL |
+|---------|-------|------------|
+| **Slightly Epic Mashups** | Mashups / Multi-genre | https://a6.asurahosting.com:6520/radio.mp3 |
+| **EDM Techno Forever** | EDM / Techno | http://ec1.yesstreaming.net:3500/stream |
+| **Electronic Dance Radio** | EDM | http://mpc1.mediacp.eu:18000/stream |
+| **The Epic Channel** | Progressive Rock | http://fra-pioneer08.dedicateware.com:1100/stream |
+| **Classical Public Domain Radio** | Classical | http://relay.publicdomainradio.org/classical.mp3 |
+| **Cafe HD** | Various | http://live.playradio.org:9090/CafeHD |
+| **Zen Garden** | New Age / Ambient | https://kathy.torontocast.com:3250/stream |
+| **Badlands Classic Rock** | Classic Rock | http://ec3.yesstreaming.net:2040/stream |
+| **UTurn Classic Rock** | Classic Rock | http://listen.uturnradio.com:7000/classic_rock |
+| **Alternative** | Alternative Rock | http://stream.xrm.fm:8000/xrm-alt.aac |
 
 ## Getting Started
 
