@@ -9,6 +9,14 @@ Function loadContentFeed() as Object
             MetaType: "icecast"
         },
         {
+            Title: "K.G.L.W. Bootlegger"
+            streamFormat: "mp3"
+            Logo: "pkg:/images/KGLWbootlegger.png"
+            Stream: "https://gizzradio.live/listen/listen/radio.mp3"
+            MetaUrl: "https://gizzradio.live/listen/listen/status-json.xsl"
+            MetaType: "icecast"
+        },
+        {
             Title: "EDM Techno Forever"
             streamFormat: "mp3"
             Logo: "pkg:/images/EDMTechnoForever.jpg"
@@ -46,14 +54,6 @@ Function loadContentFeed() as Object
             Logo: "pkg:/images/CafeHD.jpg"
             Stream: "http://live.playradio.org:9090/CafeHD"
             MetaUrl: "http://live.playradio.org:9090/status-json.xsl"
-            MetaType: "icecast"
-        },
-        {
-            Title: "Zen Garden"
-            streamFormat: "mp3"
-            Logo: "pkg:/images/ZenGarden.jpg"
-            Stream: "https://kathy.torontocast.com:3250/stream"
-            MetaUrl: "https://kathy.torontocast.com:3250/status-json.xsl"
             MetaType: "icecast"
         },
         {
@@ -102,6 +102,14 @@ Function loadContentFeed() as Object
             Logo: "pkg:/images/UltimateChillRadio.jpg"
             Stream: "http://ec1.yesstreaming.net:3290/stream"
             MetaUrl: "http://ec1.yesstreaming.net:3290/status-json.xsl"
+            MetaType: "icecast"
+        },
+        {
+            Title: "Zen Garden"
+            streamFormat: "mp3"
+            Logo: "pkg:/images/ZenGarden.jpg"
+            Stream: "https://kathy.torontocast.com:3250/stream"
+            MetaUrl: "https://kathy.torontocast.com:3250/status-json.xsl"
             MetaType: "icecast"
         }
     ]
