@@ -26,6 +26,9 @@ An internet radio streaming app for Roku. Browse and listen to a curated selecti
 | **Badlands Classic Rock** | Classic Rock | http://ec3.yesstreaming.net:2040/stream |
 | **UTurn Classic Rock** | Classic Rock | http://listen.uturnradio.com:7000/classic_rock |
 | **Alternative** | Alternative Rock | http://stream.xrm.fm:8000/xrm-alt.aac |
+| **Chill Lounge** | Chill / Lounge | http://harddanceradio.ddns.is74.ru:8000/lounge |
+| **Time 2 Chill Radio** | Chill / Ambient | http://ec6.yesstreaming.net:3610/stream |
+| **Ultimate Chill** | Chill / Ambient | http://ec1.yesstreaming.net:3290/stream |
 
 ## Getting Started
 

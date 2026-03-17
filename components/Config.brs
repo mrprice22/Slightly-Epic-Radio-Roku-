@@ -79,6 +79,30 @@ Function loadContentFeed() as Object
             Stream: "http://stream.xrm.fm:8000/xrm-alt.aac"
             MetaUrl: "http://stream.xrm.fm:8000/7.html"
             MetaType: "shoutcast"
+        },
+        {
+            Title: "Chill Lounge"
+            streamFormat: "aac"
+            Logo: "pkg:/images/ChillLoungeRadio.jpg"
+            Stream: "http://harddanceradio.ddns.is74.ru:8000/lounge"
+            MetaUrl: "http://harddanceradio.ddns.is74.ru:8000/status-json.xsl"
+            MetaType: "icecast"
+        },
+        {
+            Title: "Time 2 Chill Radio"
+            streamFormat: "mp3"
+            Logo: "pkg:/images/Time2ChillRadio.jpg"
+            Stream: "http://ec6.yesstreaming.net:3610/stream"
+            MetaUrl: "http://ec6.yesstreaming.net:3610/status-json.xsl"
+            MetaType: "icecast"
+        },
+        {
+            Title: "Ultimate Chill"
+            streamFormat: "mp3"
+            Logo: "pkg:/images/UltimateChillRadio.jpg"
+            Stream: "http://ec1.yesstreaming.net:3290/stream"
+            MetaUrl: "http://ec1.yesstreaming.net:3290/status-json.xsl"
+            MetaType: "icecast"
         }
     ]
     return arr
