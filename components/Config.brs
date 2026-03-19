@@ -33,14 +33,6 @@ Function loadContentFeed() as Object
             MetaType: "icecast"
         },
         {
-            Title: "The Epic Channel"
-            streamFormat: "mp3"
-            Logo: "pkg:/images/TheEpicChannel.jpg"
-            Stream: "http://fra-pioneer08.dedicateware.com:1100/stream"
-            MetaUrl: "http://fra-pioneer08.dedicateware.com:1100/status-json.xsl"
-            MetaType: "icecast"
-        },
-        {
             Title: "Classical Public Domain Radio"
             streamFormat: "mp3"
             Logo: "pkg:/images/ClassicalPublicDomainRadio.jpg"
@@ -54,6 +46,14 @@ Function loadContentFeed() as Object
             Logo: "pkg:/images/CafeHD.jpg"
             Stream: "http://live.playradio.org:9090/CafeHD"
             MetaUrl: "http://live.playradio.org:9090/status-json.xsl"
+            MetaType: "icecast"
+        },
+        {
+            Title: "The Epic Channel"
+            streamFormat: "mp3"
+            Logo: "pkg:/images/TheEpicChannel.jpg"
+            Stream: "http://fra-pioneer08.dedicateware.com:1100/stream"
+            MetaUrl: "http://fra-pioneer08.dedicateware.com:1100/status-json.xsl"
             MetaType: "icecast"
         },
         {
@@ -81,6 +81,22 @@ Function loadContentFeed() as Object
             MetaType: "shoutcast"
         },
         {
+            Title: "Stacey Radio"
+            streamFormat: "mp3"
+            Logo: "pkg:/images/Stacey_Radio.jpg"
+            Stream: "http://stacey-campbell.com:8001/dadradio.mp3"
+            MetaUrl: "http://stacey-campbell.com:8001/status-json.xsl"
+            MetaType: "icecast"
+        },
+        {
+            Title: "SOL FM"
+            streamFormat: "aac"
+            Logo: "pkg:/images/SOL_FM.jpg"
+            Stream: "http://radiosolfm.bounceme.net:8002/solfm"
+            MetaUrl: "http://radiosolfm.bounceme.net:8002/status-json.xsl"
+            MetaType: "icecast"
+        },
+        {
             Title: "Chill Lounge"
             streamFormat: "aac"
             Logo: "pkg:/images/ChillLoungeRadio.jpg"
@@ -97,7 +113,7 @@ Function loadContentFeed() as Object
             MetaType: "icecast"
         },
         {
-            Title: "Ultimate Chill"
+            Title: "Ultimate Chill (Pop)"
             streamFormat: "mp3"
             Logo: "pkg:/images/UltimateChillRadio.jpg"
             Stream: "http://ec1.yesstreaming.net:3290/stream"

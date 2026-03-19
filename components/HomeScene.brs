@@ -135,7 +135,10 @@ Sub updateStationDisplay(index as Integer)
         ' Stop previous metadata task and start a new one
         m.NowPlayingTask.control = "STOP"
         m.NowPlayingLabel.text = ""
+        m.currentStationTitle = station.Title  'sp1
+        m.NowPlayingLabel.text = station.Title  'sp1
 
+        m.NowPlayingBar.visible = true  'sp2
         if station.MetaType <> "none" and station.MetaUrl <> ""
             m.NowPlayingTask = createObject("roSGNode", "NowPlayingTask")
             m.NowPlayingTask.observeField("nowPlaying", "onNowPlayingChanged")
@@ -153,7 +156,7 @@ End Sub
 Sub onNowPlayingChanged()
     title = m.NowPlayingTask.nowPlaying
     if title <> ""
-        m.NowPlayingLabel.text = title
+        m.NowPlayingLabel.text = m.currentStationTitle + chr(10) + title  'sp3
         m.NowPlayingBar.visible = true
     end if
 End Sub
