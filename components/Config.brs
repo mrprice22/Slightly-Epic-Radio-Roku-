@@ -127,6 +127,30 @@ Function loadContentFeed() as Object
             Stream: "https://kathy.torontocast.com:3250/stream"
             MetaUrl: "https://kathy.torontocast.com:3250/status-json.xsl"
             MetaType: "icecast"
+        },
+        {
+            Title: "Synthetic FM"
+            streamFormat: "mp3"
+            Logo: "pkg:/images/synthetic_fm.png"
+            Stream: "http://stream.syntheticfm.com:8040/live"
+            MetaUrl: "http://stream.syntheticfm.com:8040/status-json.xsl"
+            MetaType: "icecast"
+        },
+        {
+            Title: "Synthetic FM (ITA)"
+            streamFormat: "mp3"
+            Logo: "pkg:/images/synthetic_fm_ita.jpg"
+            Stream: "http://stream.syntheticfm.com:8030/stream"
+            MetaUrl: "http://stream.syntheticfm.com:8030/status-json.xsl"
+            MetaType: "icecast"
+        },
+        {
+            Title: "Radio Popolare (ITA)"
+            streamFormat: "mp3"
+            Logo: "pkg:/images/Radio Popolare Milano.png"
+            Stream: "https://livex.radiopopolare.it/radiopop"
+            MetaUrl: ""
+            MetaType: "none"
         }
     ]
     return arr
