@@ -41,14 +41,6 @@ Function loadContentFeed() as Object
             MetaType: "none"
         },
         {
-            Title: "Cafe HD"
-            streamFormat: "aac"
-            Logo: "pkg:/images/CafeHD.jpg"
-            Stream: "http://live.playradio.org:9090/CafeHD"
-            MetaUrl: "http://live.playradio.org:9090/status-json.xsl"
-            MetaType: "icecast"
-        },
-        {
             Title: "The Epic Channel"
             streamFormat: "mp3"
             Logo: "pkg:/images/TheEpicChannel.jpg"
@@ -119,6 +111,14 @@ Function loadContentFeed() as Object
             Stream: "http://ec1.yesstreaming.net:3290/stream"
             MetaUrl: "http://ec1.yesstreaming.net:3290/status-json.xsl"
             MetaType: "icecast"
+        },
+        {
+            Title: "The Jazz Groove"
+            streamFormat: "mp3"
+            Logo: "pkg:/images/the_jazz_groove.png"
+            Stream: "https://audio-edge-es6pf.mia.g.radiomast.io/8a384ff3-6fd1-4e5d-b47d-0cbefeffe8d7"
+            MetaUrl: ""
+            MetaType: "none"
         },
         {
             Title: "Zen Garden"
