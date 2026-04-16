@@ -1,4 +1,4 @@
-Function loadContentFeed() as Object
+Function getRawStations() as Object
     arr = [
         {
             Title: "Slightly Epic Mashups"
@@ -153,5 +153,104 @@ Function loadContentFeed() as Object
             MetaType: "none"
         }
     ]
+    ' Assign a stable Id = original index so order/visibility settings survive across runs.
+    for i = 0 to arr.count() - 1
+        arr[i].Id = i
+    end for
     return arr
+End Function
+
+Function parseIdList(s as String) as Object
+    result = []
+    if s = invalid or s = "" then return result
+    parts = s.Split(",")
+    for each p in parts
+        t = p.Trim()
+        if t <> ""
+            result.push(t.toInt())
+        end if
+    end for
+    return result
+End Function
+
+Function idListToString(ids as Object) as String
+    parts = []
+    for each id in ids
+        parts.push(id.toStr())
+    end for
+    return parts.Join(",")
+End Function
+
+Function loadStationSettings() as Object
+    sec = createObject("roRegistrySection", "SlightlyEpicRadio")
+    order = []
+    hidden = []
+    if sec.exists("stationOrder")
+        order = parseIdList(sec.read("stationOrder"))
+    end if
+    if sec.exists("hiddenStations")
+        hidden = parseIdList(sec.read("hiddenStations"))
+    end if
+    return { order: order, hidden: hidden }
+End Function
+
+Sub saveStationSettings(order as Object, hidden as Object)
+    sec = createObject("roRegistrySection", "SlightlyEpicRadio")
+    sec.write("stationOrder", idListToString(order))
+    sec.write("hiddenStations", idListToString(hidden))
+    sec.flush()
+End Sub
+
+' Returns all stations in the user's configured order, including hidden ones.
+Function loadAllStationsOrdered() as Object
+    raw = getRawStations()
+    settings = loadStationSettings()
+    if settings.order.count() = 0
+        return raw
+    end if
+
+    byId = {}
+    for each s in raw
+        byId[s.Id.toStr()] = s
+    end for
+
+    result = []
+    seen = {}
+    for each id in settings.order
+        key = id.toStr()
+        if byId.DoesExist(key) and not seen.DoesExist(key)
+            result.push(byId[key])
+            seen[key] = true
+        end if
+    end for
+    ' Append any stations added since the order was saved.
+    for each s in raw
+        if not seen.DoesExist(s.Id.toStr())
+            result.push(s)
+        end if
+    end for
+    return result
+End Function
+
+' Returns only visible stations in the user's configured order — used for playback.
+Function loadContentFeed() as Object
+    all = loadAllStationsOrdered()
+    settings = loadStationSettings()
+    hiddenSet = {}
+    for each id in settings.hidden
+        hiddenSet[id.toStr()] = true
+    end for
+
+    visible = []
+    for each s in all
+        if not hiddenSet.DoesExist(s.Id.toStr())
+            visible.push(s)
+        end if
+    end for
+
+    ' Safety: never return an empty list — fall back to showing everything.
+    if visible.count() = 0
+        return all
+    end if
+    return visible
 End Function
