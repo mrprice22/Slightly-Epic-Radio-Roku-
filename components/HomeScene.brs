@@ -17,6 +17,7 @@ Sub loadContent()
     m.Hint = m.top.findNode("Hint")
     m.Timer = m.top.findNode("Timer")
     m.StationPoster = m.top.findNode("StationPoster")
+    m.KeyHolder = m.top.findNode("KeyHolder")
     m.NowPlayingLabel = m.top.findNode("NowPlayingLabel")
     m.NowPlayingBar = m.top.findNode("NowPlayingBar")
 
@@ -53,10 +54,14 @@ Sub loadContent()
     m.NowPlayingTask = createObject("roSGNode", "NowPlayingTask")
     m.NowPlayingTask.observeField("nowPlaying", "onNowPlayingChanged")
 
-    m.Video.setFocus(true)
+    m.KeyHolder.setFocus(true)
 
     m.Timer.observeField("fire", "hideHint")
     m.RowList.observeField("rowItemSelected", "ChannelChange")
+
+    m.LongPressTimer = m.top.findNode("LongPressTimer")
+    m.LongPressTimer.observeField("fire", "onLongPressFire")
+    m.okHeld = false
 End Sub
 
 Sub hideHint()
@@ -75,7 +80,7 @@ Sub optionsMenu()
         hideHint()
     else
         m.HideBar.control = "start"
-        m.Video.setFocus(true)
+        m.KeyHolder.setFocus(true)
         showHint()
     End if
 End Sub
@@ -94,15 +99,27 @@ Function supportDialog()
 End Function
 
 Function onKeyEvent(key as String, press as Boolean) as Boolean
+    ' Long-press OK opens the station edit panel. OK only reaches the scene
+    ' when Video has focus; the RowList consumes its own OK for selection.
+    if key = "OK" and not m.editMode
+        if press
+            if not m.okHeld
+                m.okHeld = true
+                m.LongPressTimer.control = "stop"
+                m.LongPressTimer.control = "start"
+            end if
+            return false
+        else
+            m.okHeld = false
+            m.LongPressTimer.control = "stop"
+            return false
+        end if
+    end if
+
     if not press then return false
 
     if m.editMode
         return handleEditKey(key)
-    end if
-
-    if key = "info"
-        openEditPanel()
-        return true
     end if
 
     handled = false
@@ -126,18 +143,22 @@ Function ChannelChange()
 
     ' Map the repeated list index back to real station index
     index = m.RowList.rowItemFocused[1] MOD m.stationCount
-    saveLastStation(index)
+    saveLastStation(m.array[index].Id)
     updateStationDisplay(index)
 End Function
 
 Sub rowListContentChanged()
     m.RowList.content = m.LoadTask.content
     if m.count = 0
-        ' Resume the last listened station, or default to the first one
-        lastStation = getLastStation()
-        if lastStation < 0 or lastStation >= m.stationCount
-            lastStation = 0
-        end if
+        ' Resume the last listened station by Id, or default to the first one
+        lastId = getLastStation()
+        lastStation = 0
+        for i = 0 to m.stationCount - 1
+            if m.array[i].Id = lastId
+                lastStation = i
+                exit for
+            end if
+        end for
 
         startIndex = m.midPoint + lastStation
         m.RowList.jumpToRowItem = [0, startIndex + 100]
@@ -184,14 +205,18 @@ Sub onNowPlayingChanged()
     end if
 End Sub
 
-Sub saveLastStation(index as Integer)
+Sub saveLastStation(stationId as Integer)
     sec = createObject("roRegistrySection", "SlightlyEpicRadio")
-    sec.write("lastStation", index.toStr())
+    sec.write("lastStationId", stationId.toStr())
     sec.flush()
 End Sub
 
 Function getLastStation() as Integer
     sec = createObject("roRegistrySection", "SlightlyEpicRadio")
+    ' Prefer station Id; fall back to legacy index for older installs.
+    if sec.exists("lastStationId")
+        return sec.read("lastStationId").toInt()
+    end if
     if sec.exists("lastStation")
         return sec.read("lastStation").toInt()
     end if
@@ -249,7 +274,7 @@ Sub closeEditPanel()
     if m.editPrevFocus = "RowList"
         m.RowList.setFocus(true)
     else
-        m.Video.setFocus(true)
+        m.KeyHolder.setFocus(true)
     end if
 
     ' Rebuild the playback list from updated settings.
@@ -370,8 +395,15 @@ Sub updateEditHighlight()
     m.EditHighlightRight.visible = true
 End Sub
 
+Sub onLongPressFire()
+    if m.okHeld and not m.editMode
+        m.okHeld = false
+        openEditPanel()
+    end if
+End Sub
+
 Function handleEditKey(key as String) as Boolean
-    if key = "back" or key = "info"
+    if key = "back"
         closeEditPanel()
         return true
     end if

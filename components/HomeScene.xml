@@ -5,12 +5,24 @@
 	<script type = "text/brightscript" uri = "pkg:/components/Config.brs" />
 
 	<children>
+		<!-- Invisible focusable node. Owns focus during playback so the
+		     scene's onKeyEvent receives all key presses (including long-press
+		     OK). Keeping focus off Video and RowList avoids their built-in
+		     key handling interfering with our own. -->
+		<Rectangle
+			id = "KeyHolder"
+			translation = "[0,0]"
+			width = "1"
+			height = "1"
+			color = "0x00000000"
+			opacity = "0" />
+
 		<Video
 			id = "Video"
 			translation = "[0,0]"
 			width = "1920"
 			height = "1080"
-			enableUI = "true"
+			enableUI = "false"
 			loop = "true" />
 
 		<!-- Station artwork shown during playback -->
@@ -106,8 +118,12 @@
 			id = "AdTimer"
 			repeat = "true"
 			duration = "1200" />
+		<Timer
+			id = "LongPressTimer"
+			repeat = "false"
+			duration = "1" />
 
-		<!-- Station edit panel (shown on * key) -->
+		<!-- Station edit panel (shown on long-press of OK) -->
 		<Rectangle
 			id = "EditBg"
 			translation = "[0,0]"
@@ -128,7 +144,7 @@
 				translation = "[80,95]"
 				width = "1760"
 				height = "40"
-				text = "Up/Down: station   Left/Right: column   OK: toggle or move   Back or *: save and close"
+				text = "Up/Down: station   Left/Right: column   OK: toggle or move   Back: save and close"
 				font = "font:SmallSystemFont"
 				color = "0xAAAAAAFF" />
 			<Group id = "EditList" translation = "[80,160]" />

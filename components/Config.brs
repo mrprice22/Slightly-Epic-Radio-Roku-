@@ -153,9 +153,11 @@ Function getRawStations() as Object
             MetaType: "none"
         }
     ]
-    ' Assign a stable Id = original index so order/visibility settings survive across runs.
+    ' Use explicit Id from each entry if present; fall back to array index.
     for i = 0 to arr.count() - 1
-        arr[i].Id = i
+        if arr[i].Id = invalid
+            arr[i].Id = i
+        end if
     end for
     return arr
 End Function
