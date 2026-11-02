@@ -1,7 +1,7 @@
 Function getRawStations() as Object
     arr = [
         {
-            Title: "Slightly Epic Mashups"
+            Title: "Todd's Rockn'Blues"
             streamFormat: "mp3"
             Logo: "pkg:/images/SlightlyEpicMashups.jpg"
             Stream: "https://a6.asurahosting.com:6520/radio.mp3"

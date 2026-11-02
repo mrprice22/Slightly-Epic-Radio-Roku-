@@ -16,7 +16,7 @@ An internet radio streaming app for Roku. Browse and listen to a curated selecti
 
 | Icon | Station | Genre | Stream URL |
 |------|---------|-------|------------|
-| ![](images/SlightlyEpicMashups.jpg) | **Slightly Epic Mashups** | Mashups / Multi-genre | https://a6.asurahosting.com:6520/radio.mp3 |
+| ![](images/SlightlyEpicMashups.jpg) | **Todd's Rockn'Blues** | Rock / Blues | https://a6.asurahosting.com:6520/radio.mp3 |
 | ![](images/KGLWbootlegger.png) | **K.G.L.W. Bootlegger** | Rock / Live Bootlegs | https://gizzradio.live/listen/listen/radio.mp3 |
 | ![](images/EDMTechnoForever.jpg) | **EDM Techno Forever** | EDM / Techno | http://ec1.yesstreaming.net:3500/stream |
 | ![](images/EDR.jpg) | **Electronic Dance Radio** | EDM | http://mpc1.mediacp.eu:18000/stream |
