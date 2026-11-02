@@ -3,7 +3,7 @@ Function getRawStations() as Object
         {
             Title: "Todd's Rockn'Blues"
             streamFormat: "mp3"
-            Logo: "pkg:/images/SlightlyEpicMashups.jpg"
+            Logo: "pkg:/images/todds_rocknblues.png"
             Stream: "https://a6.asurahosting.com:6520/radio.mp3"
             MetaUrl: "https://a6.asurahosting.com:6520/status-json.xsl"
             MetaType: "icecast"
