@@ -15,6 +15,7 @@ Function getRawStations() as Object
             Stream: "https://gizzradio.live/listen/listen/radio.mp3"
             MetaUrl: "https://gizzradio.live/listen/listen/status-json.xsl"
             MetaType: "icecast"
+            Active: false
         },
         {
             Title: "EDM Techno Forever"
@@ -55,6 +56,7 @@ Function getRawStations() as Object
             Stream: "http://ec3.yesstreaming.net:2040/stream"
             MetaUrl: "http://ec3.yesstreaming.net:2040/status-json.xsl"
             MetaType: "icecast"
+            Active: false
         },
         {
             Title: "UTurn Classic Rock"
@@ -87,6 +89,7 @@ Function getRawStations() as Object
             Stream: "http://radiosolfm.bounceme.net:8002/solfm"
             MetaUrl: "http://radiosolfm.bounceme.net:8002/status-json.xsl"
             MetaType: "icecast"
+            Active: false
         },
         {
             Title: "Chill Lounge"
@@ -151,15 +154,48 @@ Function getRawStations() as Object
             Stream: "https://livex.radiopopolare.it/radiopop"
             MetaUrl: ""
             MetaType: "none"
+        },
+        {
+            Title: "Spooky Audio Machine"
+            streamFormat: "mp3"
+            Logo: "pkg:/images/spooky_audio_machine.png"
+            Stream: "https://stream.homerslotr.com/spooky"
+            MetaUrl: "https://stream.homerslotr.com/status-json.xsl?mount=/spooky"
+            MetaType: "icecast"
+        },
+        {
+            Title: "Thursday Game Night"
+            streamFormat: "mp3"
+            Logo: "pkg:/images/thursday_game_night.png"
+            Stream: "https://stream.homerslotr.com/mlg"
+            MetaUrl: "https://stream.homerslotr.com/status-json.xsl?mount=/mlg"
+            MetaType: "icecast"
+        },
+        {
+            Title: "PAC-MAN Audio Chaos"
+            streamFormat: "mp3"
+            Logo: "pkg:/images/pacman_audio_chaos.png"
+            Stream: "https://stream.homerslotr.com/pacman"
+            MetaUrl: "https://stream.homerslotr.com/status-json.xsl?mount=/pacman"
+            MetaType: "icecast"
         }
     ]
     ' Use explicit Id from each entry if present; fall back to array index.
+    ' Ids are assigned BEFORE filtering so they stay stable when a station is
+    ' switched off. Entries with Active: false (set in the Station Manager) are
+    ' left out of the list.
+    result = []
     for i = 0 to arr.count() - 1
         if arr[i].Id = invalid
             arr[i].Id = i
         end if
+        keep = true
+        if arr[i].Active <> invalid
+            if arr[i].Active = false then keep = false
+        end if
+        if keep then result.push(arr[i])
     end for
-    return arr
+    return result
 End Function
 
 Function parseIdList(s as String) as Object
